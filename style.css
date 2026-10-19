@@ -108,30 +108,40 @@ li.completed .title {
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 5px;
+  align-items: center;
+}
+
+.btn-complete, .btn-move, .btn-delete {
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: opacity 0.2s;
+}
+
+.btn-complete:hover, .btn-move:hover, .btn-delete:hover {
+  opacity: 0.8;
 }
 
 .btn-complete {
   background: #28a745;
   color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
 }
-.btn-complete:hover { background: #218838; }
 
 .btn-move {
   background: #ffc107;
   color: #333;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
 }
-.btn-move:hover { background: #e0a800; }
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+  padding: 4px 6px;
+  font-size: 14px;
+  line-height: 1;
+}
 
 .empty-state {
   text-align: center;
