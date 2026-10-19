@@ -101,6 +101,25 @@ const server = http.createServer((req, res) => {
       res.writeHead(200);
       return res.end(JSON.stringify(todos[todoIndex]));
     }
+
+    // 4. DELETE /api/todos/:id
+    if (req.method === 'DELETE') {
+      const parts = pathname.split('/');
+      const id = parts[3];
+
+      let todos = readTodos();
+      const initialLength = todos.length;
+      todos = todos.filter(t => t.id !== id);
+
+      if (todos.length === initialLength) {
+        res.writeHead(404);
+        return res.end(JSON.stringify({ error: 'Todo not found' }));
+      }
+
+      writeTodos(todos);
+      res.writeHead(200);
+      return res.end(JSON.stringify({ success: true }));
+    }
   }
 
   // --- STATIC FILE SERVING ---
