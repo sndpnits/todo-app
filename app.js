@@ -71,19 +71,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const completeBtn = document.createElement('button');
       completeBtn.className = 'btn-complete';
-      completeBtn.textContent = todo.completed ? 'Undo' : 'Complete';
-      completeBtn.onclick = () => toggleComplete(todo._id);
+      completeBtn.textContent = todo.completed ? '↺ Undo' : '✓ Done';
+      completeBtn.onclick = () => toggleComplete(todo.id);
 
       const moveBtn = document.createElement('button');
       moveBtn.className = 'btn-move';
-      moveBtn.textContent = 'Move → Next Day';
-      moveBtn.onclick = () => moveToNextDay(todo._id);
+      moveBtn.textContent = '→ Tomorrow';
+      moveBtn.onclick = () => moveToNextDay(todo.id);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn-delete';
+      deleteBtn.innerHTML = '&times;';
+      deleteBtn.title = 'Delete';
+      deleteBtn.onclick = () => deleteTodo(todo.id);
 
       actionsDiv.appendChild(completeBtn);
-      // Only show the move button if the task is not completed (optional UI choice)
+      // Only show the move button if the task is not completed
       if (!todo.completed) {
         actionsDiv.appendChild(moveBtn);
       }
+      actionsDiv.appendChild(deleteBtn);
 
       li.appendChild(titleSpan);
       li.appendChild(actionsDiv);
@@ -131,6 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
       fetchTodos(); // Refreshes current view (task will disappear from today)
     } catch (error) {
       console.error('Error moving task:', error);
+    }
+  }
+
+  // Delete Todo
+  async function deleteTodo(id) {
+    if (!confirm('Are you sure you want to delete this task?')) return;
+    try {
+      await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+      fetchTodos();
+    } catch (error) {
+      console.error('Error deleting task:', error);
     }
   }
 
