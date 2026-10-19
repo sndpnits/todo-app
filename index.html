@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily TODO App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Daily TODOs</h1>
+    
+    <div class="date-selector">
+      <button id="prev-day" class="nav-btn">&lt; Prev Day</button>
+      <input type="date" id="current-date">
+      <button id="next-day" class="nav-btn">Next Day &gt;</button>
+    </div>
+
+    <form id="todo-form">
+      <input type="text" id="todo-input" placeholder="What needs to be done today?" required autocomplete="off">
+      <button type="submit" class="add-btn">Add Task</button>
+    </form>
+
+    <ul id="todo-list">
+      <!-- Tasks injected via JS -->
+    </ul>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
